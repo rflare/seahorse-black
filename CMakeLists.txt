@@ -4,30 +4,25 @@ project( seahorse-black )
 
 find_package( OpenGL REQUIRED )
 
-include_directories( ${OPENGL_INCLUDE_DIRS} )
+include_directories( ${OPENGL_INCLUDE_DIRS} include)
 
 set( GLFW_BUILD_DOCS OFF CACHE BOOL  "GLFW lib only" )
+set( GLFW_BUILD_TESTS OFF CACHE BOOL  "GLFW lib only" )
+set( GLFW_BUILD_EXAMPLES OFF CACHE BOOL  "GLFW lib only" )
 set( GLFW_INSTALL OFF CACHE BOOL  "GLFW lib only" )
-set( GLAD_GL "" )
 
 add_subdirectory( glfw )
 
-option( SB-USE-GLFW-GLAD "Use GLAD from GLFW" ON )
 
-if( GLFW-CMAKE-STARTER-USE-GLFW-GLAD )
-    include_directories("${GLFW_SOURCE_DIR}/deps")
-    set( GLAD_GL "${GLFW_SOURCE_DIR}/deps/glad/gl.h" )
-endif()
-
-if( MSVC )
-    SET( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /ENTRY:mainCRTStartup" )
-endif()
 
 set( SB-SRC
     src/main.cpp
+    src/window.cpp
+
+    include/window.h
 )
 
-add_executable( out WIN32 ${SB-SRC} ${GLAD_GL} )
+add_executable( out WIN32 ${SB-SRC} )
 target_link_libraries( out ${OPENGL_LIBRARIES} glfw )
 if( MSVC )
     if(${CMAKE_VERSION} VERSION_LESS "3.6.0")
