@@ -1,6 +1,6 @@
 cmake_minimum_required( VERSION 3.5 )
 
-project( GLFW-CMake-starter )
+project( seahorse-black )
 
 find_package( OpenGL REQUIRED )
 
@@ -12,7 +12,7 @@ set( GLAD_GL "" )
 
 add_subdirectory( glfw )
 
-option( GLFW-CMAKE-STARTER-USE-GLFW-GLAD "Use GLAD from GLFW" ON )
+option( SB-USE-GLFW-GLAD "Use GLAD from GLFW" ON )
 
 if( GLFW-CMAKE-STARTER-USE-GLFW-GLAD )
     include_directories("${GLFW_SOURCE_DIR}/deps")
@@ -23,16 +23,16 @@ if( MSVC )
     SET( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /ENTRY:mainCRTStartup" )
 endif()
 
-set( GLFW-CMAKE-STARTER-SRC
-        main.cpp
-        )
+set( SB-SRC
+    src/main.cpp
+)
 
-add_executable( GLFW-CMake-starter WIN32 ${GLFW-CMAKE-STARTER-SRC} ${GLAD_GL} )
-target_link_libraries( GLFW-CMake-starter ${OPENGL_LIBRARIES} glfw )
+add_executable( out WIN32 ${SB-SRC} ${GLAD_GL} )
+target_link_libraries( out ${OPENGL_LIBRARIES} glfw )
 if( MSVC )
     if(${CMAKE_VERSION} VERSION_LESS "3.6.0")
         message( "\n\t[ WARNING ]\n\n\tCMake version lower than 3.6.\n\n\t - Please update CMake and rerun; OR\n\t - Manually set 'GLFW-CMake-starter' as StartUp Project in Visual Studio.\n" )
     else()
-        set_property( DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT GLFW-CMake-starter )
+        set_property( DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT out )
     endif()
 endif()
