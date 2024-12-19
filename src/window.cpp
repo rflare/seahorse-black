@@ -15,7 +15,7 @@ Window::Window() {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(1920, 1080, "GLFW CMake starter", NULL, NULL);
+    window = glfwCreateWindow(640, 480, "GLFW CMake starter", NULL, NULL);
     if (!window) {
         glfwTerminate();
         throw "";
@@ -30,6 +30,8 @@ Window::Window() {
     }
 
     printf("OpenGL version: %s\n", glGetString(GL_VERSION));
+
+    glViewport(0, 0, 640, 480);
 
 }
 
