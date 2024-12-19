@@ -16,10 +16,12 @@ add_subdirectory( glfw )
 
 
 set( SB-SRC
+    src/glad.c
     src/main.cpp
     src/window.cpp
-
-    include/window.h
+    src/sprite.cpp
+    src/shader.cpp
+    src/sb_file.cpp
 )
 
 add_executable( out WIN32 ${SB-SRC} )

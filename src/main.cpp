@@ -1,16 +1,22 @@
 #include <window.h>
+#include <sprite.h>
+#include <shader.h>
 
-int main(void)
+int main()
 {
 
-    Window* mainWindow = new Window();
+    Window mainWindow;
 
-    /* Loop until the user closes the window */
-    while (!mainWindow->ShouldClose()) {
-        mainWindow->Update();
+    Sprite sprite;
+    Shader shader("resources/vertex.glsl", "resources/fragment.glsl");
+    
+    while(!mainWindow.ShouldClose()) {
+        mainWindow.Update();
+        shader.Use();
+        sprite.Draw();
     }
 
-    mainWindow->End();
+    mainWindow.End();
 
-    return 0;
+
 }
