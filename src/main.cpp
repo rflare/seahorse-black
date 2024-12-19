@@ -3,33 +3,38 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include <window.h>
-#include <sprite.h>
+#include <GLFW/glfw3.h>
+
 #include <shader.h>
+#include <sprite.h>
+#include <window.h>
 
+int main() {
+  double currentFrameTime = 0;
+  double lastFrameTime;
+  Window mainWindow;
 
-int main()
-{
+  Sprite sprite;
+  Shader shader("resources/vertex.glsl", "resources/fragment.glsl");
 
-    Window mainWindow;
+  glm::mat4 transform = glm::mat4(1.0f);
 
-    Sprite sprite;
-    Shader shader("resources/vertex.glsl", "resources/fragment.glsl");
+  while (!mainWindow.ShouldClose()) {
+    mainWindow.Update();
 
+    lastFrameTime = currentFrameTime;
+    currentFrameTime = glfwGetTime();
+    double deltaTime = lastFrameTime - currentFrameTime;
 
-    
-    while(!mainWindow.ShouldClose()) {
-
-        glm::mat4 transform = glm::mat4(1.0f);
-        transform = glm::rotate(transform, (float)glfwGetTime(), glm::vec3(0.0, 0.0, 1.0));
-
-        mainWindow.Update();
-        shader.Use();
-        shader.SetMat4("transform", transform);
-        sprite.Draw();
+    if (mainWindow.IsKeyPressed(GLFW_KEY_SPACE)) {
+      transform =
+          glm::rotate(transform, (float)(1 * deltaTime), glm::vec3(0, 0, 1));
     }
 
-    mainWindow.End();
+    shader.Use();
+    shader.SetMat4("transform", transform);
+    sprite.Draw();
+  }
 
-
+  mainWindow.End();
 }

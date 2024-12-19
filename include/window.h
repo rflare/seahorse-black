@@ -11,6 +11,8 @@ class Window {
         void Update();
         void End();
         bool ShouldClose(); 
+
+        bool IsKeyPressed(int key);
 };
 
 #endif // !WINDOW_H
