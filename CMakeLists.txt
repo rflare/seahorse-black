@@ -4,7 +4,7 @@ project( seahorse-black )
 
 find_package( OpenGL REQUIRED )
 
-include_directories( ${OPENGL_INCLUDE_DIRS} include)
+include_directories( ${OPENGL_INCLUDE_DIRS} include glm)
 
 set( GLFW_BUILD_DOCS OFF CACHE BOOL  "GLFW lib only" )
 set( GLFW_BUILD_TESTS OFF CACHE BOOL  "GLFW lib only" )
